@@ -11,7 +11,14 @@ func (k msgServer) CreatePost(goCtx context.Context, msg *types.MsgCreatePost) (
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// TODO: Handling the message
-	_ = ctx
+	// Create variable of type Post
+	var post = types.Post{
+		Creator: msg.Creator,
+		Title:   msg.Title,
+		Body:    msg.Body,
+	}
+	id := k.AppendPost(ctx, post)
+	// _ = ctx
 
-	return &types.MsgCreatePostResponse{}, nil
+	return &types.MsgCreatePostResponse{Id: id}, nil
 }
